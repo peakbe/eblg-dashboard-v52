@@ -331,10 +331,9 @@ function updateMetarUI(data) {
     updateSonometers(runway);
     drawRunway(runway);
     drawCorridor(runway);
-    updateRunwayPanel(panel.innerText =
-    `Piste ${runway} (${r.heading}°) – ${phase === "landing" ? "Atterrissage" : "Décollage"} – ` +
-    `vent ${windDir}°/${windSpeed} kt – crosswind ≈ ${info.crosswind} kt (Δ${info.angleDiff}°)`;
-);
+    panel.innerText =
+    `Piste ${runway} – Vent ${windDir}°/${windSpeed} kt`;
+
 }
 let phase = "takeoff";
 
