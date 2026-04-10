@@ -46,8 +46,23 @@ app.get("/fids", async (req, res) => {
     const url = `https://opensky-network.org/api/flights/departure?airport=EBLG&begin=${begin}&end=${now}`;
 
     const data = await safeFetch(url);
+
+    // Si OpenSky renvoie une erreur → fallback propre
+    if (data.fallback) {
+        return res.json([{
+            flight: "N/A",
+            destination: "N/A",
+            time: "N/A",
+            status: "Unavailable",
+            fallback: true,
+            timestamp: new Date().toISOString()
+        }]);
+    }
+
+    // Sinon → données réelles
     res.json(data);
 });
+
 
 
 app.get("/sonos", (req, res) => {
